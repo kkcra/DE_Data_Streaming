@@ -1,0 +1,6 @@
+# Ignore local data and logs
+*.db
+*.log
+parquet_data/
+__pycache__/
+.env
