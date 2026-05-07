@@ -21,7 +21,7 @@ findspark.init()
 def main():
     # 2. INITIALIZE SESSION
     spark = SparkSession.builder \
-            .appName("LaptopHealth_GoldLayer") \
+            .appName("PySpark_Quickstart") \
             .master("local[*]") \
             .config("spark.sql.shuffle.partitions", "2") \
             .getOrCreate()
@@ -34,6 +34,10 @@ def main():
     # Suppress noise
     spark.sparkContext.setLogLevel("ERROR")
 
+    # ------------------------------------------
+    # ------------------------------------------
+    # ------------------------------------------
+
     try:
         df = spark.createDataFrame([
             Row(a=1, b=2., c='string1', d=date(2000, 1, 1), e=datetime(2000, 1, 1, 12, 0)),
@@ -43,14 +47,22 @@ def main():
         df.show()
         print("✅ DataFrame created successfully!")
 
+    # ------------------------------------------
+
     except Exception as e:
         print(f"❌ Error during processing: {e}")
         print("Hint: Make sure your Consumer has actually saved .parquet files in the directory.")
+
+    # ------------------------------------------
 
     finally:
         print("🔌 Shutting down Spark...")
         spark.stop()
         sys.exit(0)
+
+    # ------------------------------------------
+    # ------------------------------------------
+    # ------------------------------------------
 
 if __name__ == "__main__":
     main()
