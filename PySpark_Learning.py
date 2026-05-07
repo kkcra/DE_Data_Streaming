@@ -118,14 +118,9 @@ def main():
                             .withColumn("cpu_diff", F.col("cpu_usage_pct") - F.col("rolling_avg_cpu"))
         )
 
-        # Why No Commas? (Method Chaining)
-        # This is the biggest hurdle for SQL users moving to PySpark. The reason there are no commas is that PySpark uses Method Chaining (also known as a Fluent Interface).
-
         gold_trends_df.show()
 
         gold_trends_df.select("timestamp", "cpu_usage_pct", "rolling_avg_cpu").show(10)
-
-
 
         # SHOW THE RESULTS
         # We select only relevant columns to see the "smoothing" effect
@@ -136,8 +131,6 @@ def main():
             F.round("rolling_avg_cpu", 2).alias("moving_avg"),
             F.round("cpu_diff", 2).alias("spike_intensity")
         ).show(20, truncate=False)
-
-
 
         #####################################
 
